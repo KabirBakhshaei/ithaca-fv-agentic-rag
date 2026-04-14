@@ -439,7 +439,7 @@ MIT: see [LICENSE](LICENSE).
 
 ## 🙏 Acknowledgements
 
-- [ITHACA-FV](https://github.com/ITHACA-FV/ITHACA-FV) by Prof. Giovanni Stabile et al.
+- [ITHACA-FV](https://github.com/ITHACA-FV/ITHACA-FV) by Prof. [Giovanni Stabile](https://www.giovannistabile.com).
 - [LangChain](https://github.com/langchain-ai/langchain) and [LangGraph](https://github.com/langchain-ai/langgraph)
 - [ChromaDB](https://www.trychroma.com/) — local vector database
 - [Sentence Transformers](https://www.sbert.net/) — local embeddings
