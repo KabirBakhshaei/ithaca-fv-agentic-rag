@@ -103,7 +103,7 @@ ithaca_fv_rag/
 
 ---
 
-### 1 — Clone This Repository
+### 1- Clone This Repository
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/ithaca-fv-rag.git
