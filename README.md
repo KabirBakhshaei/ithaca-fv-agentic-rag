@@ -441,8 +441,8 @@ MIT: see [LICENSE](LICENSE).
 
 - [ITHACA-FV](https://github.com/ITHACA-FV/ITHACA-FV) by Prof. [Giovanni Stabile](https://www.giovannistabile.com).
 - [LangChain](https://github.com/langchain-ai/langchain) and [LangGraph](https://github.com/langchain-ai/langgraph)
-- [ChromaDB](https://www.trychroma.com/) — local vector database
-- [Sentence Transformers](https://www.sbert.net/) — local embeddings
-- [Gradio](https://gradio.app/) — web interface
-- [Ollama](https://ollama.ai/) and [vLLM](https://github.com/vllm-project/vllm) — local LLM serving
+- [ChromaDB](https://www.trychroma.com/): local vector database
+- [Sentence Transformers](https://www.sbert.net/): local embeddings
+- [Gradio](https://gradio.app/): web interface
+- [Ollama](https://ollama.ai/) and [vLLM](https://github.com/vllm-project/vllm): local LLM serving
 - ERC DANTE project (Grant No. 101115741) for supporting this research
