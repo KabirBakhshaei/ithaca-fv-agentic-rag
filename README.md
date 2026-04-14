@@ -445,4 +445,4 @@ MIT: see [LICENSE](LICENSE).
 - [Sentence Transformers](https://www.sbert.net/): local embeddings
 - [Gradio](https://gradio.app/): web interface
 - [Ollama](https://ollama.ai/) and [vLLM](https://github.com/vllm-project/vllm): local LLM serving
-- ERC DANTE project (Grant No. 101115741) for supporting this research
+- ERC DANTE project for supporting this research
