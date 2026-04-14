@@ -1,0 +1,94 @@
+# ============================================================
+#  ITHACA-FV Agentic RAG — Central Configuration
+#  Edit this file to switch between providers and tune
+#  retrieval parameters without touching any Python code.
+# ============================================================
+
+# ----------------------------------------------------------
+# LLM Backend
+#   provider: "vllm"        → fully local, recommended for HPC  ← DEFAULT
+#             "openrouter"  → free cloud API (requires key)
+#             "ollama"      → fully local, recommended for laptop/workstation
+#
+# Recommended setup (HPC with H100s):
+#   1. Download model:
+#      huggingface-cli download google/gemma-4-31b-it \
+#          --local-dir /storage/home/k.bakhshaei/models/gemma-4-31b-it
+#   2. Start vLLM server:
+#      vllm serve /storage/home/k.bakhshaei/models/gemma-4-31b-it \
+#          --tensor-parallel-size 2 --max-model-len 32768 \
+#          --gpu-memory-utilization 0.90 --port 8000
+# ----------------------------------------------------------
+llm:
+  provider: "vllm"
+  # Path to locally downloaded Gemma 4 model weights
+  model: "/storage/home/k.bakhshaei/models/gemma-4-31b-it"
+  # For OpenRouter (cloud fallback): "google/gemma-4-31b-it:free"
+  # For Ollama (laptop):             "gemma3:27b"
+  temperature: 0.1           # low = more deterministic / factual
+  max_tokens: 1024
+  # base_url is auto-set per provider; override here only if needed:
+  base_url: "http://localhost:8000/v1"   # vllm default
+  # base_url: "http://localhost:11434"   # ollama default
+
+# ----------------------------------------------------------
+# Embedding Model  (always runs locally via sentence-transformers)
+# ----------------------------------------------------------
+embeddings:
+  # Choose speed vs quality:
+  #   Fast     → "all-MiniLM-L6-v2"          (80 MB,  384-dim)
+  #   Balanced → "BAAI/bge-base-en-v1.5"     (430 MB, 768-dim)
+  #   Best     → "BAAI/bge-large-en-v1.5"    (1.3 GB, 1024-dim) ← default (H100)
+  model: "BAAI/bge-large-en-v1.5"
+  device: "cuda"   # "cpu" if no GPU available during ingestion
+  batch_size: 64  # H100 handles large batches well; reduce to 64 on smaller GPUs
+
+# ----------------------------------------------------------
+# Vector Store  (ChromaDB — local, persistent on disk)
+# ----------------------------------------------------------
+vectorstore:
+  persist_dir: "./data/chroma_db"
+  collection_name: "ithaca_fv_docs"
+  distance_metric: "cosine"
+
+# ----------------------------------------------------------
+# Document Ingestion
+# ----------------------------------------------------------
+ingestion:
+  repo_url: "https://github.com/ITHACA-FV/ITHACA-FV"
+  local_repo_path: "./data/ITHACA-FV"
+  # File types to ingest; comment out any you don't need
+  file_extensions:
+    - ".md"       # Markdown docs / READMEs
+    - ".rst"      # reStructuredText docs
+    - ".H"        # OpenFOAM C++ header files
+    - ".C"        # OpenFOAM C++ source files
+    - ".py"       # Python tutorials/scripts
+    - ".txt"      # Plain-text notes
+  # Directories inside the repo to skip
+  exclude_dirs:
+    - ".git"
+    - "build"
+    - "ThirdParty"
+  chunk_size: 1000      # characters per chunk
+  chunk_overlap: 150    # overlap to preserve context at boundaries
+
+# ----------------------------------------------------------
+# Agentic RAG Parameters
+# ----------------------------------------------------------
+rag:
+  top_k: 5              # number of docs retrieved per query
+  max_retries: 2        # query-rewrite retries before giving up
+  score_threshold: 0.35 # minimum cosine similarity to keep a doc
+
+# ----------------------------------------------------------
+# Gradio App
+# ----------------------------------------------------------
+app:
+  host: "0.0.0.0"
+  port: 7860
+  # Set share: true when running on HPC to get a public URL
+  # via Gradio's built-in tunnel (no extra SSH tunnel needed)
+  share: true
+  title: "ITHACA-FV Assistant"
+  description: "Ask anything about the ITHACA-FV reduced-order modelling library."

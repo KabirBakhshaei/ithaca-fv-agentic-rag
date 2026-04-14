@@ -1,0 +1,41 @@
+# ── Secrets ────────────────────────────────────────
+.env
+
+# ── Large data (never on GitHub) ───────────────────
+data/              # ChromaDB vectors + ITHACA-FV clone
+models/            # Gemma 4 weights (60 GB)
+hf_cache/          # HuggingFace model cache
+
+# ── Python ─────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── Logs & SLURM outputs ───────────────────────────
+logs/
+*.out
+*.err
+slurm-*.out
+
+# ── Gradio temp files ──────────────────────────────
+.gradio/
+
+# ── IDE ────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+
+# ── Jupyter ────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── OS ─────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Conda / pip temp ───────────────────────────────
+*.cache
+tmp/assets/Demo.gif
