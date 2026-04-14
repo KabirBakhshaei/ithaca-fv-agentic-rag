@@ -110,7 +110,7 @@ git clone https://github.com/YOUR_USERNAME/ithaca-fv-rag.git
 cd ithaca-fv-rag
 ```
 
-### 2 — Create Environment & Install Dependencies
+### 2- Create Environment & Install Dependencies
 
 ```bash
 # Using conda (recommended on HPC)
@@ -130,7 +130,7 @@ pip install --upgrade transformers    # Gemma 4 requires transformers 5.5+
 pip install langchain-text-splitters sentence-transformers langchain-chroma
 ```
 
-### 3 — Configure
+### 3- Configure
 
 Edit `config/config.yaml` to select your LLM provider (vLLM is the default):
 
@@ -146,7 +146,7 @@ Only needed if using OpenRouter:
 cp .env.example .env    # then add OPENROUTER_API_KEY=sk-or-...
 ```
 
-### 4 — Set Up Your LLM
+### 4- Set Up Your LLM
 
 **Option A: vLLM + Gemma 4 31B (recommended for HPC with H100s):**
 ```bash
@@ -197,7 +197,7 @@ llm:
   model: "google/gemma-4-31b-it:free"
 ```
 
-### 5 — Ingest ITHACA-FV Documentation
+### 5- Ingest ITHACA-FV Documentation
 
 **HPC only: redirect HuggingFace cache to avoid home directory quota issues:**
 ```bash
@@ -220,7 +220,7 @@ python scripts/ingest.py
 ```
 
 
-### 6 — Launch the Chat App
+### 6- Launch the Chat App
 
 **First, make sure the vLLM server is running** (see Step 4 Option A). Then in a new terminal:
 
